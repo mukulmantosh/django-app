@@ -18,13 +18,58 @@ This is Django Starter Template which will be used in GitOps demo using ArgoCD.
 - [x] [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) - Argo CD is implemented as a kubernetes controller which continuously monitors running applications and compares the current, live state against the desired target state
 
 
+### ArgoCD Installation
+
+Make sure to follow the official docs of ArgoCD installation.
+
+- [https://argo-cd.readthedocs.io/en/stable/](https://argo-cd.readthedocs.io/en/stable/)
+
+#### Commands
+
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+![argo_ui](./images/argocd-ui.gif)
+
+
 ### DockerHub
- - [https://hub.docker.com/r/mukulmantosh/ecommerce-fastapi](https://hub.docker.com/r/mukulmantosh/ecommerce-fastapi)
+
+Images are being hosted in DockerHub. 
+ - [https://hub.docker.com/r/mukulmantosh/app-sample](https://hub.docker.com/r/mukulmantosh/app-sample)
+
+#### Dockerfile
+
+```dockerfile
+FROM python:3.10-alpine
+
+# set work directory
+WORKDIR /usr/src/app
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install dependencies
+RUN pip install --upgrade pip
+COPY ./requirements.txt /usr/src/app
+RUN pip install -r requirements.txt
+
+# copy project
+COPY . /usr/src/app
+
+EXPOSE 8000
+
+RUN python manage.py migrate
+RUN python manage.py create_dummy_user
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
 
 
 ## References
 
-If you are interested to know more about AWS with Python, then you can follow the below links.
+If you are interested to know more about GitOps & ArgoCD, then you can follow the below links.
 
-- [Developing Serverless APIs using AWS Toolkit](https://www.jetbrains.com/pycharm/guide/tutorials/intro-aws/)
-- [Developing Django Application using AWS NICE DCV, high-performance remote desktop and application streaming](https://www.jetbrains.com/pycharm/guide/tutorials/django-aws/) 
+- [Understanding Argo CD: Kubernetes GitOps Made Simple](https://codefresh.io/learn/argo-cd/)
+- [Guide To GitOps by WeaveWorks](https://www.weave.works/technologies/gitops/) 
