@@ -20,7 +20,9 @@ This is Django Starter Template which will be used in GitOps demo using ArgoCD.
 
 ### ArgoCD Installation
 
-Make sure to follow the official docs of ArgoCD installation.
+Follow the official docs of ArgoCD installation.
+
+* Before that make sure Docker Desktop or Minikube is running on your machine with K8s enabled.
 
 - [https://argo-cd.readthedocs.io/en/stable/](https://argo-cd.readthedocs.io/en/stable/)
 
