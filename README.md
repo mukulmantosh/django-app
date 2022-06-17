@@ -68,6 +68,15 @@ RUN python manage.py create_dummy_user
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 ```
 
+### Flow
+
+- Make sure Docker is Up and Running
+- Build & Upload the image to docker registry
+- Clone this repository : [https://github.com/mukulmantosh/django-app-k8s](https://github.com/mukulmantosh/django-app-k8s)
+- Update the manifest file ```argo-app.yml``` 
+- Updated the manifest files pointed in the ```dev``` path
+- Make sure to point properly to the correct image registry
+- Next, follow the steps given in the ```django-app-k8s``` repository
 
 ## References
 
